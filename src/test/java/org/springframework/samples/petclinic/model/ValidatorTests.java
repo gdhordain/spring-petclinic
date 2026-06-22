@@ -29,8 +29,10 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 
 /**
- * @author Michael Isvy Simple test to make sure that Bean Validation is working (useful
- * when upgrading to a new version of Hibernate Validator/ Bean Validation)
+ * @author Michael Isvy Simple test to make sure that Bean Validation is working
+ *         (useful
+ *         when upgrading to a new version of Hibernate Validator/ Bean
+ *         Validation)
  */
 class ValidatorTests {
 
@@ -77,4 +79,12 @@ class ValidatorTests {
 		assertThat(violation.getMessage()).isEqualTo("must not be blank");
 	}
 
+	@Test
+	void shouldComputeFullname() {
+		Person person = new Person();
+		person.setFirstName("George");
+		person.setLastName("Washington");
+
+		assertThat(person.getFullName()).isEqualTo("George Washington");
+	}
 }
