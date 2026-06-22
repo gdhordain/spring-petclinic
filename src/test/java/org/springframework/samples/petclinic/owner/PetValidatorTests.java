@@ -121,6 +121,12 @@ class PetValidatorTests {
 			pet.addVisit(visit2);
 			assertThat(pet.getNumberOfVisits()).isEqualTo(2);
 		}
+
+		@Test
+		void validateAge() {
+			pet.setBirthDate(LocalDate.of(2024, 1, 1));
+			assertThat(pet.getAge()).isEqualTo(2);
+		}
 	}
 
 }
