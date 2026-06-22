@@ -30,6 +30,7 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Test class for {@link PetValidator}
@@ -112,6 +113,14 @@ class PetValidatorTests {
 			assertTrue(errors.hasFieldErrors("birthDate"));
 		}
 
+		@Test
+		void validateNumberVisits() {
+			Visit visit1 = new Visit();
+			pet.addVisit(visit1);
+			Visit visit2 = new Visit();
+			pet.addVisit(visit2);
+			assertThat(pet.getNumberOfVisits()).isEqualTo(2);
+		}
 	}
 
 }
