@@ -88,6 +88,9 @@ public class Pet extends NamedEntity {
 	}
 
 	public int getAge() {
+		if (getBirthDate() == null) {
+			return -1;
+		}
 		return Period.between(getBirthDate(), LocalDate.now()).getYears();
 	}
 

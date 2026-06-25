@@ -99,11 +99,7 @@ public class Owner extends Person {
 	}
 
 	public boolean hasPets() {
-		if (getNumberOfPets() == 0) {
-			return false;
-		} else {
-			return true;
-		}
+		return !getPets().isEmpty();
 	}
 
 	public void addPet(Pet pet) {
