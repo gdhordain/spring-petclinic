@@ -14,6 +14,7 @@
         <th th:text="#{city}">City</th>
         <th th:text="#{telephone}" style="width: 120px">Telephone</th>
         <th th:text="#{pets}">Pets</th>
+        <th th:text="#{numberOfPets}">Number of pets</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +26,8 @@
         <td th:text="${owner.city}" />
         <td th:text="${owner.telephone}" />
         <td><span th:text="${#strings.listJoin(owner.pets, ', ')}" /></td>
+        <td th:if="${owner.numberOfPets >= 0}" th:text="${owner.numberOfPets}" />
+        <td th:unless="${owner.numberOfPets >= 0}" th:text="#{birthDateMissing}" />
       </tr>
     </tbody>
   </table>
