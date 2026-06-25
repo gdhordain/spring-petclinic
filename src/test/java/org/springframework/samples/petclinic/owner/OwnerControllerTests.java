@@ -281,4 +281,10 @@ class OwnerControllerTests {
 
 		assertThat(owner.hasPets()).isEqualTo(true);
 	}
+
+	@Test
+	void getPetsNull() {
+		Owner owner = new Owner();
+		assertThat(owner.getNumberOfPets()).isEqualTo(0);
+	}
 }

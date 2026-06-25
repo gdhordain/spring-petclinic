@@ -127,6 +127,14 @@ class PetValidatorTests {
 			pet.setBirthDate(LocalDate.of(2024, 1, 1));
 			assertThat(pet.getAge()).isEqualTo(2);
 		}
+
+		@Test
+		void testGetBirthdayNull() {
+			pet.setBirthDate(null);
+
+			System.out.println(pet.getAge());
+			assertThat(pet.getAge()).isEqualTo(-1);
+		}
 	}
 
 }
