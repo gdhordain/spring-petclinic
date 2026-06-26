@@ -1,13 +1,47 @@
 package org.springframework.samples.petclinic.owner;
-import org.springframework.samples.petclinic.vet.Vet;
-import org.springframework.samples.petclinic.vet.Specialty;
+
 import org.junit.jupiter.api.Test;
-import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.is;
 
-public class Tests {
+class OwnerTests {
+	@Test
+	void getNumberPets() {
+		Owner owner = new Owner();
+		owner.setId(2);
+		owner.setFirstName("John");
+		owner.setLastName("Doe");
+		owner.setAddress("Center Street");
+		owner.setCity("New York");
+		owner.setTelephone("0123456789");
+		Pet pedro = new Pet();
+		owner.addPet(pedro);
+		Pet sam = new Pet();
+		owner.addPet(sam);
+
+		assertThat(owner.getNumberOfPets()).isEqualTo(2);
+	}
+
+	@Test
+	void hasPetsWorking() {
+		Owner owner = new Owner();
+		owner.setId(2);
+		owner.setFirstName("John");
+		owner.setLastName("Doe");
+		owner.setAddress("Center Street");
+		owner.setCity("New York");
+		owner.setTelephone("0123456789");
+		Pet pedro = new Pet();
+		owner.addPet(pedro);
+
+		assertThat(owner.hasPets()).isEqualTo(true);
+	}
+
+	@Test
+	void getPetsNull() {
+		Owner owner = new Owner();
+		assertThat(owner.getNumberOfPets()).isEqualTo(0);
+	}
 
 	@Test
 	void TestGetPetsType() {
@@ -27,32 +61,6 @@ public class Tests {
 		owner.addPet(pet3);
 
 		assertThat(owner.getPetsOfType("cat").size()).isEqualTo(1);
-	}
-
-	@Test
-	void TestLastVisit() {
-		Pet pet = new Pet();
-		Visit visit1 = new Visit();
-		visit1.setDate(LocalDate.of(2026, 6, 21));
-		Visit visit2 = new Visit();
-		visit2.setDate(LocalDate.of(2026, 6, 22));
-		pet.addVisit(visit1);
-		pet.addVisit(visit2);
-
-		assertThat(pet.getLatestVisit()).isEqualTo(visit2);
-	}
-
-	@Test
-	void TestGetSpecialitiesString() {
-		Vet vet1 = new Vet();
-		Specialty doctor = new Specialty();
-		doctor.setName("doctor");
-		Specialty surgerist = new Specialty();
-		surgerist.setName("surgerist");
-		vet1.addSpecialty(doctor);
-		vet1.addSpecialty(surgerist);
-
-		assertThat(vet1.getSpecialitiesAsText()).isEqualTo("doctor,surgerist");
 	}
 
 	@Test
