@@ -16,6 +16,7 @@
 package org.springframework.samples.petclinic.owner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -188,4 +189,40 @@ public class Owner extends Person {
 		pet.addVisit(visit);
 	}
 
+	public List<Pet> getPetsOfType(String typeName) {
+		List<Pet> pets = new ArrayList<Pet>();
+		if (typeName == null || typeName == "") {
+			return pets;
+		}
+		for (int i = 0; i < getPets().size(); i++) {
+			if (getPets().get(i).getType().getName().equalsIgnoreCase(typeName)) {
+				pets.add(getPets().get(i));
+			}
+		}
+
+		return pets;
+	}
+
+	public int getTotalNumberOfVisits() {
+		int nbTotalVisits = 0;
+
+		for (Pet pet : getPets()) {
+			nbTotalVisits += pet.getNumberOfVisits();
+		}
+
+		return nbTotalVisits;
+	}
+
+	public boolean hasValidTelephone() {
+		if (getTelephone() == null || getTelephone().length() != 10) {
+			return false;
+		}
+		for(char c : getTelephone().toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 }
