@@ -249,4 +249,42 @@ class OwnerControllerTests {
 				.andExpect(redirectedUrl("/owners/" + pathOwnerId + "/edit"))
 				.andExpect(flash().attributeExists("error"));
 	}
+
+	@Test
+	void getNumberPets() {
+		Owner owner = new Owner();
+		owner.setId(2);
+		owner.setFirstName("John");
+		owner.setLastName("Doe");
+		owner.setAddress("Center Street");
+		owner.setCity("New York");
+		owner.setTelephone("0123456789");
+		Pet pedro = new Pet();
+		owner.addPet(pedro);
+		Pet sam = new Pet();
+		owner.addPet(sam);
+
+		assertThat(owner.getNumberOfPets()).isEqualTo(2);
+	}
+
+	@Test
+	void hasPetsWorking() {
+		Owner owner = new Owner();
+		owner.setId(2);
+		owner.setFirstName("John");
+		owner.setLastName("Doe");
+		owner.setAddress("Center Street");
+		owner.setCity("New York");
+		owner.setTelephone("0123456789");
+		Pet pedro = new Pet();
+		owner.addPet(pedro);
+
+		assertThat(owner.hasPets()).isEqualTo(true);
+	}
+
+	@Test
+	void getPetsNull() {
+		Owner owner = new Owner();
+		assertThat(owner.getNumberOfPets()).isEqualTo(0);
+	}
 }
