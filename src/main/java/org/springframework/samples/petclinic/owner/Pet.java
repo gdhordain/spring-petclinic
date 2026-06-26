@@ -20,6 +20,8 @@ import java.time.Period;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.samples.petclinic.model.NamedEntity;
@@ -92,6 +94,18 @@ public class Pet extends NamedEntity {
 			return -1;
 		}
 		return Period.between(getBirthDate(), LocalDate.now()).getYears();
+	}
+
+	public Visit getLatestVisit() {
+		ArrayList<Visit> visits = new ArrayList<>(getVisits());
+		Visit lastestVisit = visits.get(0);
+		for (int i = 0; i < visits.size(); i++) {
+			if (visits.get(i).getDate().isAfter(lastestVisit.getDate())) {
+				lastestVisit = visits.get(i);
+			}
+		}
+
+		return lastestVisit;
 	}
 
 }
